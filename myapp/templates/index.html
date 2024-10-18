@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Optimizer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            color: white;
-            background-color: #4BCFFF;
+            background-color: #1e1e2f;
+            color: #f5f5f7;
         }
 
         .navbar {
@@ -21,7 +21,8 @@
             align-items: center;
             justify-content: space-between;
             padding: 1rem 2rem;
-            background-color: #4BCFFF;
+            background-color: #2a2a3c;
+            color: #f5f5f7;
         }
 
         .navbar-logo {
@@ -34,45 +35,53 @@
         }
 
         .navbar a {
-            color: white;
+            color: #f5f5f7;
             text-decoration: none;
             margin: 0 1rem;
         }
 
         .header {
             text-align: center;
-            padding: 5rem 0;
-            background-color: #4BCFFF;
+            padding: 6rem 0;
+            background-color: #2a2a3c;
         }
 
         .header h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #f5f5f7;
         }
 
         .header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin: 1rem 0;
+            color: #b3b3c9;
         }
 
         .button {
-            display: block;
-            background-color: #FF6464;
+            display: inline-block;
+            background-color: #3d85c6;
             text-align: center;
-            padding: 0.7rem 1.5rem;
+            padding: 0.8rem 1.8rem;
             color: white;
-            border-radius: 30px;
+            border-radius: 50px;
             text-decoration: none;
-            margin: 0 auto;
-            width: 150px;
+            margin-top: 2rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #326fa0;
         }
 
         .cards {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            padding: 2rem 5%;
+            padding: 3rem 5%;
             margin-bottom: 2rem;
-            background-color: #4BCFFF;
+            background-color: #1e1e2f;
         }
 
         .card {
@@ -80,17 +89,22 @@
             max-width: 30%;
             padding: 2rem;
             margin: 1rem;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            background-color: white;
-            color: black;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            background-color: #2a2a3c;
+            color: #f5f5f7;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .white-section {
-            background-color: white;
-            color: black;
-            padding: 3rem 10%;
+            background-color: #2a2a3c;
+            color: #f5f5f7;
+            padding: 4rem 10%;
             text-align: center;
         }
 
@@ -101,14 +115,19 @@
         }
 
         .btn {
-            border: 2px solid gray;
-            color: gray;
-            background-color: white;
-            padding: 8px 20px;
+            border: 2px solid #5d5d72;
+            color: #f5f5f7;
+            background-color: transparent;
+            padding: 10px 25px;
             border-radius: 8px;
             font-size: 1rem;
             font-weight: bold;
-            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #3d85c6;
         }
 
         .upload-btn-wrapper input[type=file] {
@@ -131,6 +150,7 @@
             display: inline-block;
             padding-left: 1rem;
             vertical-align: middle;
+            color: #b3b3c9;
         }
 
         /* Responsive adjustments */
@@ -147,7 +167,6 @@
                 margin: 1rem 0;
             }
         }
-        
     </style>
 </head>
 
@@ -181,7 +200,7 @@
             <p>線形計画法を用いた数理最適化を行い、各メンバーが効率的にタスクにかける時間パターンを出力</p>
         </div>
     </div>
-    
+
     <div class="white-section centered-content" id="white-section">
         <div class="upload-section">
             <h2>Let's Optimize！！</h2>
@@ -222,54 +241,4 @@
                         <span class="file-name-display" id="personsFileName"></span>
                     </div>
                     <div class="form-group mt-3">
-                        <label>Tasks (CSV File):</label>
-                        <div class="upload-btn-wrapper">
-                            <button class="btn">ファイルを選択</button>
-                            <input type="file" name="tasks_file" required onchange="displayFileName(this, 'tasksFileName')">
-                        </div>
-                        <span class="file-name-display" id="tasksFileName"></span>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-primary">Upload and Proceed to Settings</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script>
-        function displayFileName(inputElement, displayElementId) {
-            const fileName = inputElement.files[0].name;
-            document.getElementById(displayElementId).textContent = fileName;
-        }
-    </script>
-    <script>
-        document.getElementById("smoothScrollLink").addEventListener("click", function(event){
-            event.preventDefault();
-            smoothScrollTo(document.getElementById("white-section"));
-        });
-    
-        function smoothScrollTo(target, duration = 800) {
-            const startingY = window.pageYOffset;
-            const elementY = window.pageYOffset + target.getBoundingClientRect().top;
-            const diff = elementY - startingY;
-            let start;
-    
-            window.requestAnimationFrame(function step(timestamp) {
-                if (!start) start = timestamp;
-                const time = timestamp - start;
-                const percent = Math.min(time / duration, 1);
-    
-                window.scrollTo(0, startingY + diff * percent);
-    
-                if (time < duration) {
-                    window.requestAnimationFrame(step);
-                }
-            });
-        }
-    </script>
-    <footer style="background-color: #333; padding: 1rem 0; text-align: center;">
-        <p>&copy; 2023 Task Optimizer. 　&copy; 郎朗</p>
-    </footer>
-</body>
-</html>
-
+                        <label>Tasks
