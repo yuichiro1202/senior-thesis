@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Task Optimizer - Settings</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background-color: white;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar-logo i {
+            margin-right: 0.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .navbar-logo i {
+            margin-right: 0.5rem;
+        }
+
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 2rem 5%;
+            margin-bottom: 2rem;
+            background-color: white;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+            background-color: white;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background-color: #4BCFFF;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo i {
+            margin-right: 0.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 5rem 0;
+            background-color: #4BCFFF;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .button {
+            display: block;
+            background-color: #939597;
+            text-align: center;
+            padding: 0.7rem 1.5rem;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 0 auto;
+            width: 150px;
+        }
+
+
+        cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 2rem 5%;
+            margin-bottom: 2rem;
+            background-color: #4BCFFF;
+        }
+
+        .card {
+            flex: 1;
+            max-width: 140%;
+            padding: 2rem;
+            margin: 1rem auto;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+        
+
+        .white-section {
+            background-color: white;
+            color: black;
+            padding: 3rem 10%;
+            text-align: center;
+        }
+
+        #submit-button-container {
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .btn-primary {
+            background-color: #333;
+            border-color: #333;
+        }
+        
+        .btn-primary:hover {
+            background-color: #333;
+            color: white;
+            border-color: white;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .card {
+                max-width: 48%;
+                margin: 1rem 0.5%;
+            }
+        }
+
+        
+        .setting-box {
+            flex: 1;
+            max-width: 30%;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #efeded;
+            color: black;
+            text-align: center;
+            
+        }
+
+        .setting-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .setting-title i {
+            margin-right: 10px;
+            color: #000000;
+        }
+
+        .details-button {
+            background-color: #939597;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .settings-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .setting-box {
+            flex: 1 0 30%; /* Each box will take up about 30% of the container's width */
+            margin: 10px;
+            max-width: calc(33.333% - 20px); /* Adjusting for margin */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .setting-box {
+                flex-basis: 100%; /* On smaller screens, each box takes the full width */
+                margin: 10px 0;
+                max-width: 100%;
+            }
+        }
+        
+        
+    </style>
+    <script>
+        function updateSliderValue(taskName, value) {
+            document.getElementById(taskName).innerText = value;
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <i class="fa-solid fa-list-check fa-lg"></i>
+            <span>Team 郎朗</span>
+        </div>
+    </div>
+    
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Task Optimizer - Settings</h1>
+        <div class="container">
+            <!-- Box for Task Settings -->
+            <div class="setting-box">
+                <div class="setting-title">
+                    <i class="fas fa-cog"></i>
+                    各人員のタスク設定
+                </div>
+                <button class="details-button" onclick="scrollToSection('task-settings')">詳細設定</button>
+            </div>
+
+            <!-- Box for Number of People Settings -->
+            <div class="setting-box">
+                <div class="setting-title">
+                    <i class="fas fa-cog"></i>
+                    必要人数設定
+                </div>
+                <button class="details-button" onclick="scrollToSection('people-settings')">詳細設定</button>
+            </div>
+
+            <!-- Box for Threshold Settings -->
+            <div class="setting-box">
+                <div class="setting-title">
+                    <i class="fas fa-cog"></i>
+                    適性閾値の設定
+                </div>
+                <button class="details-button" onclick="scrollToSection('threshold-settings')">詳細設定</button>
+            </div>
+        </div>
+
+        <script>
+            // Placeholder functions for button actions
+            function openTaskSettings() {
+                alert("Open Task Settings");
+            }
+
+            function openPeopleSettings() {
+                alert("Open People Settings");
+            }
+
+            function openThresholdSettings() {
+                alert("Open Threshold Settings");
+            }
+        </script>
+        <form action="{{ url_for('settings') }}" method="post" onsubmit="handleFormSubmit()">
+            {% for person in persons %}
+            <div class="scrollable-container" style="max-height: 600px; overflow-y: auto;">
+                <div class="card mb-4" id="task-settings">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        {{ person['last_name'] }} {{ person['first_name'] }}
+                        <button aria-controls="settings_{{ person['last_name'] }}_{{ person['first_name'] }}" aria-expanded="false" class="btn btn-link" data-target="#settings_{{ person['last_name'] }}_{{ person['first_name'] }}" data-toggle="collapse" type="button">
+                            ▼
+                        </button>
+                    </div>
+                    
+                    <div class="collapse" id="settings_{{ person['last_name'] }}_{{ person['first_name'] }}">
+                        <div class="card-body">
+                            <h4 class="card-title">固定タスク割り当て</h4>
+                            <div class="form-group">
+                                {% for task in tasks %}
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input task-checkbox" data-opposite="{{ person['last_name'] }}_{{ person['first_name'] }}_prohibited_{{ task['task_name'] }}" id="{{ person['last_name'] }}_{{ person['first_name'] }}_{{ task['task_name'] }}" name="{{ person['last_name'] }}_{{ person['first_name'] }}_fixed_tasks" value="{{ task['task_name'] }}" onclick="toggleOppositeCheckbox(this)">
+                                    <label class="custom-control-label" for="{{ person['last_name'] }}_{{ person['first_name'] }}_{{ task['task_name'] }}">{{ task['task_name'] }}</label>
+                                    <input class="ml-2 task-input" disabled="" min="0" name="{{ person['last_name'] }}_{{ person['first_name'] }}_{{ task['task_name'] }}_fixed_hours" placeholder="Hours" step="0.5" type="number"/>
+                                </div>
+                                {% endfor %}
+                                <small class="form-text text-muted">固定時間入力を有効にするには固定タスクをチェックしてください。チェックが入った状態で0もしくは無入力だと固定タスクで自動割り当てになります。</small>
+                            </div>
+                            <h4 class="card-title">除外タスク</h4>
+                            <div class="form-group">
+                                {% for task in tasks %}
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input task-checkbox" data-opposite="{{ person['last_name'] }}_{{ person['first_name'] }}_{{ task['task_name'] }}" id="{{ person['last_name'] }}_{{ person['first_name'] }}_prohibited_{{ task['task_name'] }}" name="{{ person['last_name'] }}_{{ person['first_name'] }}_prohibited_tasks" value="{{ task['task_name'] }}" onclick="toggleOppositeCheckbox(this)">
+                                    <label class="custom-control-label" for="{{ person['last_name'] }}_{{ person['first_name'] }}_prohibited_{{ task['task_name'] }}">{{ task['task_name'] }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <h3 class="mb-3" id="people-settings">人数の調整（最小人数）:</h3>
+            {% for task in tasks %}
+            <div class="form-group">
+                <label>{{ task['task_name'] }}:</label>
+                <input class="custom-range" max="10" min="1" name="{{ task['task_name'] }}_min_people" oninput="updateSliderValue('{{ task['task_name'] }}_value', this.value)" type="range" value="{{ task['n_people'] }}"/>
+                <span class="font-weight-bold" id="{{ task['task_name'] }}_value">{{ task['n_people'] }}</span>
+            </div>
+            {% endfor %}
+            
+            <div class="form-group"  id="threshold-settings">
+                <label for="threshold">適合度行列の閾値:</label>
+                <input type="number" class="form-control" id="threshold" name="threshold" step="0.01" min="0" max="1" value="{{ threshold | default(0.5) }}">
+                <small class="form-text text-muted">適合度行列の閾値を設定してください（0から1の範囲）。初期値は適合度の中央値となっています。</small>
+            </div>
+<!--            <label for="threshold" id="threshold-settings">適性閾値（初期値は中央値）:</label>-->
+<!--            <input type="number" id="threshold" name="threshold" min="0" max="1" step="0.01" value="{{ median_threshold }}">-->
+<!--            <input type="submit" value="最適化実行">-->
+                
+            <div id="submit-button-container">
+                <button class="btn btn-primary btn-block" type="submit">Apply and Proceed to Results</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function handleFormSubmit() {
+            const taskCheckboxes = document.querySelectorAll('.task-checkbox');
+            taskCheckboxes.forEach(checkbox => {
+                const relatedInput = checkbox.parentNode.querySelector('.task-input');
+                if (checkbox.checked && relatedInput && relatedInput.value === '') {
+                    relatedInput.value = '0';
+                }
+            });
+        }
+        function toggleOppositeCheckbox(checkbox) {
+            var oppositeCheckboxId = checkbox.getAttribute('data-opposite');
+            var oppositeCheckbox = document.getElementById(oppositeCheckboxId);
+            var hourInput = checkbox.parentNode.querySelector('.task-input');
+            
+            if (checkbox.checked) {
+                oppositeCheckbox.disabled = true;
+                oppositeCheckbox.checked = false;
+                
+                // 固定タスクのチェックボックスがクリックされた場合、時間入力を有効化
+                if (hourInput) {
+                    hourInput.disabled = false;
+                }
+            } else {
+                oppositeCheckbox.disabled = false;
+                
+                // 固定タスクのチェックボックスのチェックが外された場合、時間入力を無効化
+                if (hourInput) {
+                    hourInput.disabled = true;
+                }
+            }
+        }
+        function scrollToSection(sectionId) {
+                    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                }
+        
+        function sortByName() {
+            var container = document.getElementById("task-settings");
+            var cards = Array.from(container.getElementsByClassName("task-card"));
+            cards.sort(function(a, b) {
+                var nameA = a.querySelector('.card-header').textContent.trim().toLowerCase();
+                var nameB = b.querySelector('.card-header').textContent.trim().toLowerCase();
+                return nameA.localeCompare(nameB);
+            });
+            cards.forEach(function(card) {
+                container.appendChild(card);
+            });
+        }
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

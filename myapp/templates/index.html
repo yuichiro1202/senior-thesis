@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Optimizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            background-color: #4BCFFF;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background-color: #4BCFFF;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo i {
+            margin-right: 0.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 5rem 0;
+            background-color: #4BCFFF;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .button {
+            display: block;
+            background-color: #FF6464;
+            text-align: center;
+            padding: 0.7rem 1.5rem;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 0 auto;
+            width: 150px;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 2rem 5%;
+            margin-bottom: 2rem;
+            background-color: #4BCFFF;
+        }
+
+        .card {
+            flex: 1;
+            max-width: 30%;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+
+        .white-section {
+            background-color: white;
+            color: black;
+            padding: 3rem 10%;
+            text-align: center;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn {
+            border: 2px solid gray;
+            color: gray;
+            background-color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .centered-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            flex-direction: column;
+        }
+
+        .file-name-display {
+            display: inline-block;
+            padding-left: 1rem;
+            vertical-align: middle;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .card {
+                max-width: 48%;
+                margin: 1rem 0.5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%;
+                margin: 1rem 0;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <i class="fa-solid fa-list-check fa-lg"></i>
+            <span>Team 郎朗</span>
+        </div>
+    </div>
+    <div class="header">
+        <h1>Task ⚡︎ Optimizer</h1>
+        <p>チームタスクの割り当ての最適化を行います！ <br>Optimize team task assignments!</p>
+        <br>
+        <a href="#white-section" class="button" id="smoothScrollLink"><strong>Let's Optimize！</strong></a>
+    </div>
+    <div class="cards">
+        <div class="card">
+            <i class="fas fa-file-csv fa-3x"></i>
+            <h2>①CSVのアップロード</h2>
+            <p>タスク名と必要時間と必要人数が記載されたものとチームメンバーやそれぞれの稼働時間が記入されたCSVをアップロード</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-cogs fa-3x"></i>
+            <h2>②最適化の設定</h2>
+            <p>メンバーごとに固定で渡すタスクや除外するタスク、タスクに対しての最小人数をパラメーターで指定</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-chart-line fa-3x"></i>
+            <h2>③可視化</h2>
+            <p>線形計画法を用いた数理最適化を行い、各メンバーが効率的にタスクにかける時間パターンを出力</p>
+        </div>
+    </div>
+    
+    <div class="white-section centered-content" id="white-section">
+        <div class="upload-section">
+            <h2>Let's Optimize！！</h2>
+        </div>
+        
+        <div class="card mb-4 mt-4" style="width: 100%;">
+            <div class="card-header">
+                Use Sample CSVs
+            </div>
+            <div class="card-body text-center">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="{{ url_for('use_sample_csvs') }}" method="post">
+                            <button type="submit" class="btn">サンプルデータ(CSV)を用いて試してみる</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="{{ url_for('view_sample_csvs') }}" method="post">
+                            <button type="submit" class="btn">サンプルデータ(CSV)の中身を見る</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card upload-card" style="width: 100%;">
+            <div class="card-header">
+                Upload Data
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Persons (CSV File):</label>
+                        <div class="upload-btn-wrapper">
+                            <button class="btn">ファイルを選択</button>
+                            <input type="file" name="persons_file" required onchange="displayFileName(this, 'personsFileName')">
+                        </div>
+                        <span class="file-name-display" id="personsFileName"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label>Tasks (CSV File):</label>
+                        <div class="upload-btn-wrapper">
+                            <button class="btn">ファイルを選択</button>
+                            <input type="file" name="tasks_file" required onchange="displayFileName(this, 'tasksFileName')">
+                        </div>
+                        <span class="file-name-display" id="tasksFileName"></span>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Upload and Proceed to Settings</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function displayFileName(inputElement, displayElementId) {
+            const fileName = inputElement.files[0].name;
+            document.getElementById(displayElementId).textContent = fileName;
+        }
+    </script>
+    <script>
+        document.getElementById("smoothScrollLink").addEventListener("click", function(event){
+            event.preventDefault();
+            smoothScrollTo(document.getElementById("white-section"));
+        });
+    
+        function smoothScrollTo(target, duration = 800) {
+            const startingY = window.pageYOffset;
+            const elementY = window.pageYOffset + target.getBoundingClientRect().top;
+            const diff = elementY - startingY;
+            let start;
+    
+            window.requestAnimationFrame(function step(timestamp) {
+                if (!start) start = timestamp;
+                const time = timestamp - start;
+                const percent = Math.min(time / duration, 1);
+    
+                window.scrollTo(0, startingY + diff * percent);
+    
+                if (time < duration) {
+                    window.requestAnimationFrame(step);
+                }
+            });
+        }
+    </script>
+    <footer style="background-color: #333; padding: 1rem 0; text-align: center;">
+        <p>&copy; 2023 Task Optimizer. 　&copy; 郎朗</p>
+    </footer>
+</body>
+</html>
+
