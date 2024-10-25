@@ -174,11 +174,11 @@
     <div class="navbar">
         <div class="navbar-logo">
             <i class="fa-solid fa-list-check fa-lg"></i>
-            <span>Team 郎朗</span>
+            <span>Y.A</span>
         </div>
     </div>
     <div class="header">
-        <h1>Task ⚡︎ Optimizer</h1>
+        <h1>Task ☁︎ Optimizer</h1>
         <p>チームタスクの割り当ての最適化を行います！ <br>Optimize team task assignments!</p>
         <br>
         <a href="#white-section" class="button" id="smoothScrollLink"><strong>Let's Optimize！</strong></a>
@@ -241,4 +241,53 @@
                         <span class="file-name-display" id="personsFileName"></span>
                     </div>
                     <div class="form-group mt-3">
-                        <label>Tasks
+                        <label>Tasks (CSV File):</label>
+                        <div class="upload-btn-wrapper">
+                            <button class="btn">ファイルを選択</button>
+                            <input type="file" name="tasks_file" required onchange="displayFileName(this, 'tasksFileName')">
+                        </div>
+                        <span class="file-name-display" id="tasksFileName"></span>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Upload and Proceed to Settings</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function displayFileName(inputElement, displayElementId) {
+            const fileName = inputElement.files[0].name;
+            document.getElementById(displayElementId).textContent = fileName;
+        }
+    </script>
+    <script>
+        document.getElementById("smoothScrollLink").addEventListener("click", function(event){
+            event.preventDefault();
+            smoothScrollTo(document.getElementById("white-section"));
+        });
+    
+        function smoothScrollTo(target, duration = 800) {
+            const startingY = window.pageYOffset;
+            const elementY = window.pageYOffset + target.getBoundingClientRect().top;
+            const diff = elementY - startingY;
+            let start;
+    
+            window.requestAnimationFrame(function step(timestamp) {
+                if (!start) start = timestamp;
+                const time = timestamp - start;
+                const percent = Math.min(time / duration, 1);
+    
+                window.scrollTo(0, startingY + diff * percent);
+    
+                if (time < duration) {
+                    window.requestAnimationFrame(step);
+                }
+            });
+        }
+    </script>
+    <footer style="background-color: #333; padding: 1rem 0; text-align: center;">
+        <p>&copy; Task Optimizer.</p>
+    </footer>
+</body>
+</html>
